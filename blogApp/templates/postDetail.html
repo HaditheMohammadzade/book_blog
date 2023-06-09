@@ -1,0 +1,37 @@
+{% load static %}
+<html>
+    <head>
+        <link rel="stylesheet" href="{% static 'css/rating.css' %}">
+        <script type="text/javascript" src="{% static 'js/rating.js' %}"></script>
+    </head>
+<body>
+    {% load comment_tags %}
+{% load ratings %}
+    {% block content %}
+<h2>{{object.title}}</h2>
+<p style="direction:rtl">{{object.text}}</p>
+{% if object.image.url != null %}
+<img src="{{ object.image.url}}">
+{% endif %}
+<hr>
+<p style="direction:rtl" >
+    نویسنده : {{object.author}} &nbsp;&nbsp;&nbsp; تاریخ ارسال : {{object.publishDate}} &nbsp;&nbsp;&nbsp;  تاریخ آخرین ویرایش : {{object.lastModified}} &nbsp;&nbsp;&nbsp;
+     لایک ها : {{ total_likes }} &nbsp;&nbsp;&nbsp;  بازدید ها : {{ object.hit_count.hits }} 
+
+</p>
+{% ratings object %}
+</p>
+
+<br>
+{% if user.is_authenticated %}
+<a href="{% url 'post_edit' object.id %}">ویرایش</a> &nbsp;
+{% comment %} <a href="{% url 'blog_delete' object.id %}">حذف</a> {% endcomment %}
+{% endif %}
+{% for posts in object.get_related_posts_by_tags %}
+            {{ posts.title }}
+{% endfor %}
+{% render_comments request object settings_slug='default-config' %}
+{% endblock content %}
+</body>
+</html>
+

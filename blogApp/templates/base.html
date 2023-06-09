@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>project</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"> 
+    <link rel="icon" href="{% static 'images/html_icon.png' %}" type="image/x-icon">
+</head>
+<body>
+<!-- navbar -->
+<ul class="navbar">
+    <li><a href="{% url 'home' %}" ><b>صفحه اصلی</b></a></li>
+    <li><a href="{% url 'archive' %}" ><b>آرشیو پست ها</b></a></li>
+    {% if user.is_authenticated %}
+    {% comment %} <li><a href="{% url 'profile' %}"><b>  پنل مدیریت {{user}}</b></a></li> {% endcomment %}
+    <li><a href="{% url 'logout' %}"><b>خروج</b></a></li>
+    {% else %}
+    <li><a href="{% url 'signup' %}"><b>ثبت نام</b></a></li>
+    <li><a href="{% url 'login' %}"><b>ورود</b></a></li>
+    {% endif %}
+    <li><input name="search" type="text" placeholder="جستجو"></li>
+</ul>
+{% block content %}
+
+{% endblock content %}
+<!-- footer -->
+<uL class="footer">
+    <li class="footer_li">
+        <img src="{% static 'images/icons8-programming-64.png' %}" alt="logo">
+    </li>
+    <li class="footer_li">
+        <b>درباره  ما</b> 
+        <hr>
+        <ul class="footer_ul">
+            <li>1920x1080 : رزولوشن صفحه </li>
+            <li>گروه نازنین مرادیان و حدیثه محمدزاده</li>
+        </ul>
+    </li>
+    <li class="footer_li">
+        <b>تماس با ما</b>
+        <hr>
+        <ul class="footer_ul">
+            <li><a href="mailto:hadithemohamadzade@gmail.com">hadithemohamadzade@gmail.com</a> : ایمیل</li>
+            <li>شماره تماس : 09046545554</li>
+            <li>آدرس : مازندران، بابل</li>
+        </ul> 
+    </li>
+</uL>
+</body>
+</html>

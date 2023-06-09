@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>archive</title>
+        <link rel="stylesheet" href="{% static 'css/archive.css' %}">
+        <link rel="stylesheet" href="{% static 'css/grid.css' %}">
+        <link rel="stylesheet" href="../icon/font-awesome-4.7.0/">
+    </head>
+<body>
+<div class="sidebar">
+    <h3>فیلتر ها</h3>
+    <form dir=ltr method="get">
+        {{filter.form.as_p}}
+        <button type="submit"> Search </button>
+    </form>
+</div>
+</body>
+</html>
+{% endblock content %}

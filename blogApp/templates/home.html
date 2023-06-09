@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>archive</title>
+        <link rel="stylesheet" href="{% static 'css/archive.css' %}">
+        <link rel="stylesheet" href="{% static 'css/grid.css' %}">
+        <link rel="stylesheet" href="../icon/font-awesome-4.7.0/">
+    </head>
+    <body style="direction:rtl">
+        
+        <ul class="main">
+            {% for post in page_obj %}
+             <li class="post">
+                 <b><a class="post-link" href="{{post.get_absolute_url}}">{{post.title}}</a></b>
+                 <p>{{post.text|truncatewords:30}}</p>
+                 <hr>
+             </li>
+            {% endfor %}
+            <div class="pagination">
+                <span class="step-links">
+                    {% if page_obj.has_previous %}
+                        <a href="?page=1">&laquo; اول</a>
+                        &nbsp;&nbsp;&nbsp;
+                        <a href="?page={{ page_obj.previous_page_number }}">قبلی</a>
+                        &nbsp;&nbsp;&nbsp;
+                    {% endif %}
+            
+                    <span class="current">
+                        صفحه {{ page_obj.number }} از {{ page_obj.paginator.num_pages }}
+                        &nbsp;&nbsp;&nbsp;
+                    </span>
+            
+                    {% if page_obj.has_next %}
+                        <a href="?page={{ page_obj.next_page_number }}">بعدی</a>
+                        &nbsp;&nbsp;&nbsp;
+                        <a href="?page={{ page_obj.paginator.num_pages }}">آخر &raquo;</a>
+                    {% endif %}
+                </span>
+            </div>
+        </ul>
+        
+    </body>
+</html>
+{% endblock content %}

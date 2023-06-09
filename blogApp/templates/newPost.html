@@ -1,0 +1,13 @@
+{% comment %} {% extends 'base.html' %} {% endcomment %}
+{% block content %}
+<h1>پست جدید</h1>
+<form action="" , method = "POST", enctype="multipart/form-data">
+    {{form.as_p}}
+    {% csrf_token %}
+    <input type="submit" value="ارسال" >
+</form>
+{% if img_obj %}
+  <h3>Succesfully uploaded : {{img_obj.title}}</h3>
+  <img src="{{ img_obj.image.url}}" alt="connect" style="max-height:300px">
+{% endif %}
+{% endblock content %}
